@@ -4,7 +4,8 @@
   "description": "homework",
   "main": "index.js",
   "scripts": {
-	"dev": "node index.js",
+    "dev": "node index.js",
+    "hw02": "node hw02.js",
     "test": "test"
   },
   "repository": {
