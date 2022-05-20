@@ -1,0 +1,28 @@
+{
+  "name": "gb_node_js",
+  "version": "1.0.0",
+  "description": "homework",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "hw02": "node hw02.js",
+    "hw03": "node hw03.js",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmtrmkhlv/gb_node_js.git"
+  },
+  "keywords": [
+    "geekgrains"
+  ],
+  "author": "Dmitry Mikhailov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmtrmkhlv/gb_node_js/issues"
+  },
+  "homepage": "https://github.com/dmtrmkhlv/gb_node_js#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
