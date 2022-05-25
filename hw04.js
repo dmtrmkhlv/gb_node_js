@@ -1,5 +1,7 @@
 const fs = require("fs");
-const {Transform} = require('stream');
+const {
+    Transform
+} = require('stream');
 const colors = require("colors/safe");
 const path = require("path");
 const readline = require("readline");
@@ -11,6 +13,8 @@ const rl = readline.createInterface({
 const isFile = fileName => {
     return fs.lstatSync(fileName).isFile();
 }
+
+let currentPath = "";
 
 const findStr = (str, filterStr) => {
     let arrOfStr = str.toString().split("\n");
@@ -30,7 +34,7 @@ const createStream = (readStream, filterStr) => {
 }
 
 const checkIsFile = (dirInput) => {
-    console.log(dirInput);
+    console.log(35, dirInput);
     // const list = fs.readdirSync(dirInput).map((arg) => {
     //     if (isFile(arg)) {
     //         return arg;
@@ -39,7 +43,7 @@ const checkIsFile = (dirInput) => {
     //     }
     // });
 
-    const list = fs.readdirSync(dirInput).filter(isFile);
+    const list = fs.readdirSync(dirInput);
 
     inquirer
         .prompt([{
@@ -49,17 +53,20 @@ const checkIsFile = (dirInput) => {
             choices: list,
         }])
         .then((answer) => {
-            if (isFile(answer.fileName)) {
+            console.log(54, answer);
+            const filePath = path.join(__dirname, path.join(currentPath, answer.fileName));
+            currentPath = path.join(currentPath, answer.fileName);
+            console.log(62, filePath, currentPath);
+            // checkIsFile(filePath);
+            if (isFile(filePath)) {
                 console.log("is file");
-                const readStream = new fs.ReadStream(answer.fileName, 'utf8');
-                createStream(readStream, "89.123.1.41");
-                rl.close();
+                // const readStream = new fs.ReadStream(answer.fileName, 'utf8');
+                // createStream(readStream, "89.123.1.41");
+                // rl.close();
             } else {
-                const filePath = path.join("./", answer.fileName);
-                // checkIsFile(filePath);
-                console.log(filePath);
-                // checkIsFile(answer.fileName);
-                // console.log("is dir");
+                // const filePath = path.join(__dirname, answer.fileName);
+                console.log(62, filePath);
+                checkIsFile(filePath);
             }
         });
 }
