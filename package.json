@@ -10,7 +10,7 @@
     "dev": "node index.js",
     "hw02": "node hw02.js",
     "hw03": "node hw03.js",
-    "hw04": "node hw04.js",
+    "hw04": "node hw04final.js",
     "test": "test"
   },
   "repository": {
