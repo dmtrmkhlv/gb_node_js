@@ -11,6 +11,8 @@
     "hw02": "node hw02.js",
     "hw03": "node hw03.js",
     "hw04": "node hw04final.js",
+    "hw05": "node hw05.js",
+    "server": "nodemon node server.js",
     "test": "test"
   },
   "repository": {
