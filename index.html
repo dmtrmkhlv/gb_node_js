@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.socket.io/3.1.1/socket.io.min.js"
+        integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO" crossorigin="anonymous">
+    </script>
+    <title>Chat</title>
+</head>
+
+<body>
+    <h3 id="login"></h3>
+    <p>client count: <span id="client_count"></span></p>
+    <input type="text" id="input" autofocus>
+    <input type="submit" id="send" value="Send">
+    <div id="messages"></div>
+</body>
+<script type="text/javascript">
+    const socket = io('localhost:3000');
+    const login = "Login" + new Date().getSeconds() + new Date().getMilliseconds();
+    const addMessage = (data) => {
+        const msgSpan = document.createElement('span');
+        if(data.login != undefined){
+            msgSpan.innerHTML = `<i>${data.login}: ${data.msg}</i>`;
+        }else{
+            msgSpan.innerHTML = `<i>${data.msg}</i>`;
+        }
+        document.getElementById('messages').append(msgSpan);
+        document.getElementById('messages').append(document.createElement('br'));
+    };
+    document.getElementById('login').innerHTML = login;
+    socket.on('connect', function () {
+        console.log('Successful connected to server');
+        socket.emit('NEW_CLIENT_CONNECT', {
+            msg: "NEW CLIENT CONNECT",
+            login: login
+        });
+    });
+    socket.on('SERVER_MSG', function (data) {
+        addMessage(data);
+    });
+    socket.on('NEW_CONN_EVENT', function (data) {
+        addMessage(data);
+    });
+    socket.on('CLIENT_COUNT', function (data) {
+        document.getElementById('client_count').innerHTML = data.count;
+    });
+    socket.on('SET_LOGIN', function (data) {
+        document.getElementById('login').innerHTML = data.login;
+    });
+    document.getElementById('send').onclick = function () {
+        socket.emit('CLIENT_MSG', {
+            msg: document.getElementById('input').value,
+            login: login
+        });
+        document.getElementById('input').value = '';
+    };
+</script>
+
+</html>
