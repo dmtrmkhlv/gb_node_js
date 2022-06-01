@@ -12,7 +12,7 @@
     "hw03": "node hw03.js",
     "hw04": "node hw04final.js",
     "hw05": "node hw05.js",
-    "server": "nodemon node server.js",
+    "server": "nodemon node serverhw06.js",
     "test": "test"
   },
   "repository": {
@@ -31,6 +31,7 @@
   "dependencies": {
     "colors": "^1.4.0",
     "inquirer": "^8.2.4",
+    "socket.io": "^4.5.1",
     "yargs": "^17.5.1"
   }
 }
